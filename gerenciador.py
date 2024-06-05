@@ -9,12 +9,19 @@ def tf_visualizar(tarefas):
     for indice, tarefa in enumerate(tarefas, start=1):
         status  = "✓" if tarefa ["Completada"] else " "
         tf_nome = tarefa["tarefa"]
-        print(f"{indice}. [{status}]")
+        print(f"{indice}. [{status}] {tf_nome}")
+        
+def tf_atualizar(tarefas, tf_indice, tf_novo_nome):
+    tf_indiceatt = tf_indice - 1
+    tarefas[tf_indiceatt]["tarefa"] =  tf_novo_nome
+    print(f"A tarefa {tf_indice} foi alterada para {tf_novo_nome}.")
+    return
 
 
 
 
 tarefas = []
+#
 while True:
     print("=============== MENU DO GERENCIADOR ===============")
     print("\n1. Adicionar uma tarefa")
@@ -34,6 +41,12 @@ while True:
     elif escolha == "2":
         tf_visualizar(tarefas)
         
+    elif escolha == "3":
+        tf_visualizar(tarefas)   
+        tf_indice = input("Selecione a tarefa que deseja atualizar: ")
+        tf_nvnome = input("Digite o novo nome da tarefa selecionada:")
+        tf_atualizar(tarefas, tf_indice, tf_nvnome) 
+    
     elif escolha == "6":
         break
     
