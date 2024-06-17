@@ -4,6 +4,7 @@ def tf_adicionar(tarefas, tf_nome):
     print(f"A tarefa {tf_nome} foi adicionada com sucesso!")
     return
 
+
 def tf_visualizar(tarefas):
     print("\nLista de tarefas: ")
     for indice, tarefa in enumerate(tarefas, start=1):
@@ -11,26 +12,36 @@ def tf_visualizar(tarefas):
         tf_nome = tarefa["tarefa"]
         print(f"{indice}. [{status}] {tf_nome}")
         
+        
 def tf_atualizar(tarefas, tf_indice, tf_novo_nome):
-    tf_indiceatt = tf_indice - 1
-    tarefas[tf_indiceatt]["tarefa"] =  tf_novo_nome
-    print(f"A tarefa {tf_indice} foi alterada para {tf_novo_nome}.")
+    tf_ajustado = int(tf_indice) - 1
+    if tf_ajustado >= 0 and tf_ajustado < len(tarefas):
+        tarefas[tf_ajustado]["tarefa"] =  tf_novo_nome
+        print(f"A tarefa {tf_indice} foi alterada para {tf_novo_nome}.")
+    else:
+        print("Índice da tarefa inválido.")
+    return
+
+
+def tf_completar(tarefas, tf_indice):
+    tf_ajustado = int(tf_indice) - 1
+    tarefas[tf_ajustado]["completada"] = True
+    print(f"Tarefa {tf_indice} completada!")
     return
 
 
 
 
 tarefas = []
-#
 while True:
     print("=============== MENU DO GERENCIADOR ===============")
-    print("\n1. Adicionar uma tarefa")
+    print("1. Adicionar uma tarefa")
     print("2. Visualizar tarefas")
     print("3. Atualizar tarefa")
     print("4. Completar tarefa")
     print("5. Deletar uma tarefa")
     print("6. Sair")
-    print("\n===================================================")
+    print("===================================================")
 
 
     escolha = input("O que deseja fazer? ")
@@ -45,7 +56,13 @@ while True:
         tf_visualizar(tarefas)   
         tf_indice = input("Selecione a tarefa que deseja atualizar: ")
         tf_nvnome = input("Digite o novo nome da tarefa selecionada:")
-        tf_atualizar(tarefas, tf_indice, tf_nvnome) 
+        tf_atualizar(tarefas, tf_indice, tf_nvnome)
+        
+    elif escolha == "4":
+        tf_visualizar(tarefas)
+        tf_indice = int(input("Selecione a tarefa a ser completada: "))
+        tf_completar
+        
     
     elif escolha == "6":
         break
