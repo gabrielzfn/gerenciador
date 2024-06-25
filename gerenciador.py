@@ -30,6 +30,14 @@ def tf_completar(tarefas, tf_indice):
     return
 
 
+def tf_deletar(tarefas):
+    for tarefa in tarefas:
+        if tarefa['completada']:
+            tarefas.remove(tarefa)
+    print("Tarefa deletada como sucesso")      
+    return
+
+
 
 
 tarefas = []
@@ -62,7 +70,10 @@ while True:
         tf_visualizar(tarefas)
         tf_indice = int(input("Selecione a tarefa a ser completada: "))
         tf_completar
-        
+    
+    elif escolha == "5":
+        tf_deletar(tarefas)
+        tf_visualizar(tarefas)
     
     elif escolha == "6":
         break
